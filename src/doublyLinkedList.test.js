@@ -99,4 +99,88 @@ describe('Test all methods on DoublyLinkedList', ()=> {
     expect(dbly.get(3).value).toBe('Text 4')
   })
 
+  it('set the value in a valid position', ()=> {
+    const dll = new DoublyLinkedList()
+    dll.push("text1")
+    dll.push("text2")
+    dll.push("text3")
+    dll.set(1, "text4")
+    expect(dll.get(1).value).toEqual("text4")
+    expect(dll.length).toBe(3);
+  })
+  
+  it('set the value in a invalid position', ()=>{
+    const dll = new DoublyLinkedList()
+    dll.set(-1, undefined)
+    expect(dll.length).toBe(0)
+    expect(dll.head).toBe(null)
+    dll.set(1, undefined)
+    expect(dll.length).toBe(0)
+    expect(dll.head).toBe(null)
+  })
+  
+  it('set the value in the begining and end of the dll',()=>{
+    const dll = new DoublyLinkedList()
+    dll.push("text1")
+    dll.set(0,"text2")
+    expect(dll.head.value).toEqual("text2")
+    dll.push("text1")
+    dll.set(1, "text3")
+    expect(dll.tail.value).toEqual("text3")
+  
+  })
+
+  it('instert an element at the beginig of an empty ddl', ()=> {
+    const ddl = new DoublyLinkedList()
+    ddl.insert(0, "text1")
+    expect(ddl.head).toEqual(ddl.tail);
+  })
+  
+  it('instert an element at the end of a ddl', ()=> {
+    const ddl = new DoublyLinkedList()
+    ddl.push("text1")
+    ddl.insert(1, "text2")
+    expect(ddl.get(1)).toEqual(ddl.tail);
+  })
+  
+  it('instert an element in the middle of a ddl', ()=> {
+    const ddl = new DoublyLinkedList()
+    ddl.push("text1")
+    ddl.push("text2")
+    ddl.insert(1,"text3")
+    expect(ddl.get(1).value).toEqual("text3")
+  })
+  
+  it('insert an element outside of ddl boundaries', ()=>{
+    const ddl = new DoublyLinkedList()
+    ddl.push("text1")
+    ddl.push("text2")
+    expect(ddl.insert(-1,"text3")).toBe(undefined)
+    expect(ddl.insert(3,"text4")).toBe(undefined)
+    expect(ddl.length).toBe(2)
+  })
+
+  it('remove an element in the middle of the ddl',()=>{
+    const ddl = new DoublyLinkedList()
+    ddl.push("text1")
+    ddl.push("text2")
+    ddl.push("text3")
+    expect(ddl.remove(1).value).toBe("text2")
+    expect(ddl.head.next).toBe(ddl.tail)
+  })
+  it('remove the first element in the ddl',()=>{
+    const ddl = new DoublyLinkedList()
+    ddl.push("text1")
+    ddl.push("text2")
+    ddl.push("text3")
+    expect(ddl.remove(0).value).toBe("text1")
+  })
+  it('remove the last element of the ddl',()=>{
+    const ddl = new DoublyLinkedList()
+    ddl.push("text1")
+    ddl.push("text2")
+    ddl.push("text3")
+    expect(ddl.remove(2).value).toBe("text3")
+  })
+
 })

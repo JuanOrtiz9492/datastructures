@@ -96,6 +96,45 @@ class DoublyLinkedList {
       }
     }
   }
+  set(position, value){
+    const currentNode = this.get(position)
+    if(currentNode){
+      currentNode.value = value
+    } else return undefined
+  }
+  insert(position, value){
+    if(position === 0) return this.unshift(value)
+    if(position === this.length) return this.push(value)
+    const currentNode = this.get(position)
+    if(currentNode){
+      const prevNode = currentNode.prev
+      const newNode = new Node(value)
+      newNode.prev = prevNode
+      prevNode.next = newNode
+      newNode.next = currentNode
+      currentNode.prev = newNode
+      this.length++;
+      return this
+    } else {
+      return undefined
+    }
+  }
+  remove(position){
+    if (position === 0) return this.shif()
+    if (position === this.length - 1) return this.pop()
+    const currentNode = this.get(position)
+    if (currentNode){
+      const prevNode = currentNode.prev
+      const nextNode = currentNode.next
+      prevNode.next = nextNode
+      nextNode.prev = prevNode
+      currentNode.next = null
+      currentNode.prev = null
+      this.length--;
+      return currentNode
+    }
+    return undefined
+  }
 }
 
 const DLL = new DoublyLinkedList();
