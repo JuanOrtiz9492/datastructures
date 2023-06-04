@@ -1,6 +1,6 @@
 class Node {
-  constructor(value) {
-    this.value = value;
+  constructor(val) {
+    this.val = val;
     this.next = null;
     this.prev = null;
   }
@@ -12,8 +12,8 @@ class DoublyLinkedList {
     this.tail = null;
     this.length = 0;
   }
-  push(value){
-    const newNode = new Node(value);
+  push(val){
+    const newNode = new Node(val);
     if(this.length === 0){
       this.head = newNode
       this.tail = newNode
@@ -62,9 +62,9 @@ class DoublyLinkedList {
       return firstNode
     }
   }
-  unshift(value){
-    if(!this.head) return this.push(value)
-    const newNode = new Node(value)
+  unshift(val){
+    if(!this.head) return this.push(val)
+    const newNode = new Node(val)
     this.head.prev = newNode
     newNode.next = this.head
     this.head = newNode
@@ -96,19 +96,20 @@ class DoublyLinkedList {
       }
     }
   }
-  set(position, value){
+  set(position, val){
     const currentNode = this.get(position)
     if(currentNode){
-      currentNode.value = value
-    } else return undefined
+      currentNode.val = val
+      return true
+    } else return false
   }
-  insert(position, value){
-    if(position === 0) return this.unshift(value)
-    if(position === this.length) return this.push(value)
+  insert(position, val){
+    if(position === 0) return this.unshift(val)
+    if(position === this.length) return this.push(val)
     const currentNode = this.get(position)
     if(currentNode){
       const prevNode = currentNode.prev
-      const newNode = new Node(value)
+      const newNode = new Node(val)
       newNode.prev = prevNode
       prevNode.next = newNode
       newNode.next = currentNode
@@ -135,16 +136,39 @@ class DoublyLinkedList {
     }
     return undefined
   }
+  reverse(){
+    // A B C D E || 5
+    if(this.length === 0) return
+    //const tmpHead = this.head;
+    this.head = this.tail;
+    let currentNode = this.head // E
+    for(let i= 0; i< this.length; i++){ // 0 1 2 3 4
+        if(i === this.length -1) {
+            this.tail.prev = currentNode.next; // B <- A
+            this.tail = currentNode // A
+            this.tail.next = null // A -> null
+        } else {
+        const nextNode = currentNode.prev; // A
+        const prevRef = currentNode.next // C
+        currentNode.next = nextNode; // E -> D -> C -> B -> A
+        currentNode.prev = prevRef; //  null <- E <- D <- C <- B
+        currentNode = nextNode;    // A
+        }
+    }
+    return this
+}
 }
 
-const DLL = new DoublyLinkedList();
-DLL.push('Text 1')
-DLL.push('Text 2')
-DLL.push('Text 3')
-DLL.push('Text 4')
-DLL.push('Text 5')
-DLL.get(1)
-DLL.get(2)
-DLL.get(3)
+var doublyLinkedList = new DoublyLinkedList();
+ 
+doublyLinkedList.push(5).push(10).push(15).push(20);
+doublyLinkedList.set(0,10) // true
+doublyLinkedList.length // 4
+doublyLinkedList.head.val // 10
+ 
+doublyLinkedList.set(10,10) // false
+ 
+doublyLinkedList.set(2,100) // true
+doublyLinkedList.head.next.next.val; // 100
 
 module.exports = { DoublyLinkedList }

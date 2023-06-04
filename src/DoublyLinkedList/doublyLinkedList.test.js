@@ -5,11 +5,11 @@ describe('Test all methods on DoublyLinkedList', ()=> {
   it('add up to 3 elments in the doubly linked list', ()=> {
     const dbly = new DoublyLinkedList();
     dbly.push('Text 1')
-    expect(dbly.head.value).toBe(dbly.tail.value);
+    expect(dbly.head.val).toBe(dbly.tail.val);
     dbly.push('Text 2')
     dbly.push('Text 3')
-    expect(dbly.head.next.value).toBe('Text 2')
-    expect(dbly.tail.prev.value).toBe('Text 2')
+    expect(dbly.head.next.val).toBe('Text 2')
+    expect(dbly.tail.prev.val).toBe('Text 2')
   })
 
   it('pop value from an empty doublyLinkedList must return undefined', ()=>  {
@@ -20,7 +20,7 @@ describe('Test all methods on DoublyLinkedList', ()=> {
   it('pop value from an one item doublyLinkedList', ()=>{
     const dbly = new DoublyLinkedList();
     dbly.push('Text 1')
-    expect(dbly.pop().value).toBe('Text 1');
+    expect(dbly.pop().val).toBe('Text 1');
     expect(dbly.head).toBeNull();
     expect(dbly.tail).toBeNull();
   })
@@ -29,9 +29,9 @@ describe('Test all methods on DoublyLinkedList', ()=> {
     const dbly = new DoublyLinkedList();
     dbly.push('Text 1')
     dbly.push('Text 2')
-    expect(dbly.pop().value).toBe('Text 2');
-    expect(dbly.head.value).toBe('Text 1');
-    expect(dbly.tail.value).toBe('Text 1');
+    expect(dbly.pop().val).toBe('Text 2');
+    expect(dbly.head.val).toBe('Text 1');
+    expect(dbly.tail.val).toBe('Text 1');
     expect(dbly.head.next).toBeNull();
     expect(dbly.tail.next).toBeNull();
     expect(dbly.head.prev).toBeNull();
@@ -46,7 +46,7 @@ describe('Test all methods on DoublyLinkedList', ()=> {
   it('shift value from an one item doublyLinkedList', ()=>{
     const dbly = new DoublyLinkedList();
     dbly.push('Text 1')
-    expect(dbly.shif().value).toBe('Text 1');
+    expect(dbly.shif().val).toBe('Text 1');
     expect(dbly.head).toBeNull();
     expect(dbly.tail).toBeNull();
   })
@@ -55,9 +55,9 @@ describe('Test all methods on DoublyLinkedList', ()=> {
     const dbly = new DoublyLinkedList();
     dbly.push('Text 1')
     dbly.push('Text 2')
-    expect(dbly.shif().value).toBe('Text 1');
-    expect(dbly.head.value).toBe('Text 2');
-    expect(dbly.tail.value).toBe('Text 2');
+    expect(dbly.shif().val).toBe('Text 1');
+    expect(dbly.head.val).toBe('Text 2');
+    expect(dbly.tail.val).toBe('Text 2');
     expect(dbly.head.next).toBeNull();
     expect(dbly.tail.next).toBeNull();
     expect(dbly.head.prev).toBeNull();
@@ -67,11 +67,11 @@ describe('Test all methods on DoublyLinkedList', ()=> {
   it('unshift up to 2 elments in the doubly linked list', ()=> {
     const dbly = new DoublyLinkedList();
     dbly.unshift('Text 1')
-    expect(dbly.head.value).toBe(dbly.tail.value);
+    expect(dbly.head.val).toBe(dbly.tail.val);
     dbly.unshift('Text 2')
-    expect(dbly.head.value).toBe('Text 2');
-    expect(dbly.head.next.value).toBe('Text 1')
-    expect(dbly.tail.value).toBe('Text 1')
+    expect(dbly.head.val).toBe('Text 2');
+    expect(dbly.head.next.val).toBe('Text 1')
+    expect(dbly.tail.val).toBe('Text 1')
   })
 
   it('gets elements on an empty DLL', ()=> {
@@ -94,9 +94,9 @@ describe('Test all methods on DoublyLinkedList', ()=> {
     dbly.push('Text 3')
     dbly.push('Text 4')
     dbly.push('Text 5')
-    expect(dbly.get(1).value).toBe('Text 2')
-    expect(dbly.get(2).value).toBe('Text 3')
-    expect(dbly.get(3).value).toBe('Text 4')
+    expect(dbly.get(1).val).toBe('Text 2')
+    expect(dbly.get(2).val).toBe('Text 3')
+    expect(dbly.get(3).val).toBe('Text 4')
   })
 
   it('set the value in a valid position', ()=> {
@@ -105,7 +105,7 @@ describe('Test all methods on DoublyLinkedList', ()=> {
     dll.push("text2")
     dll.push("text3")
     dll.set(1, "text4")
-    expect(dll.get(1).value).toEqual("text4")
+    expect(dll.get(1).val).toEqual("text4")
     expect(dll.length).toBe(3);
   })
   
@@ -123,10 +123,10 @@ describe('Test all methods on DoublyLinkedList', ()=> {
     const dll = new DoublyLinkedList()
     dll.push("text1")
     dll.set(0,"text2")
-    expect(dll.head.value).toEqual("text2")
+    expect(dll.head.val).toEqual("text2")
     dll.push("text1")
     dll.set(1, "text3")
-    expect(dll.tail.value).toEqual("text3")
+    expect(dll.tail.val).toEqual("text3")
   
   })
 
@@ -148,7 +148,7 @@ describe('Test all methods on DoublyLinkedList', ()=> {
     ddl.push("text1")
     ddl.push("text2")
     ddl.insert(1,"text3")
-    expect(ddl.get(1).value).toEqual("text3")
+    expect(ddl.get(1).val).toEqual("text3")
   })
   
   it('insert an element outside of ddl boundaries', ()=>{
@@ -165,7 +165,7 @@ describe('Test all methods on DoublyLinkedList', ()=> {
     ddl.push("text1")
     ddl.push("text2")
     ddl.push("text3")
-    expect(ddl.remove(1).value).toBe("text2")
+    expect(ddl.remove(1).val).toBe("text2")
     expect(ddl.head.next).toBe(ddl.tail)
   })
   it('remove the first element in the ddl',()=>{
@@ -173,14 +173,26 @@ describe('Test all methods on DoublyLinkedList', ()=> {
     ddl.push("text1")
     ddl.push("text2")
     ddl.push("text3")
-    expect(ddl.remove(0).value).toBe("text1")
+    expect(ddl.remove(0).val).toBe("text1")
   })
   it('remove the last element of the ddl',()=>{
     const ddl = new DoublyLinkedList()
     ddl.push("text1")
     ddl.push("text2")
     ddl.push("text3")
-    expect(ddl.remove(2).value).toBe("text3")
+    expect(ddl.remove(2).val).toBe("text3")
+  })
+
+  it('test udemy', ()=> {
+    const doublyLinkedList = new DoublyLinkedList();
+    doublyLinkedList.push(5).push(10).push(15).push(20);
+expect(doublyLinkedList.set(0,10)).toBe(true)// true
+expect(doublyLinkedList.length).toBe(4)// 4
+console.log(doublyLinkedList.head)
+expect(doublyLinkedList.head.val).toBe(10)// 10
+expect(doublyLinkedList.set(10,10)).toBe(false)// false
+expect(doublyLinkedList.set(2,100)).toBe(true) // true
+expect(doublyLinkedList.head.next.next.val).toBe(100)
   })
 
 })
