@@ -23,20 +23,37 @@ class BinarySearchTree {
         } else {
          return helper(val, node.right)
         }
-      } else {
+      } else if (val < node.val) {
         if(node.left === null) {
           node.left = newNode
           return
         } else {
           return helper(val, node.left)
         }
+      } else {
+        return
       }
      }
      helper(val, this.root)
     }
     return this
   }
+  find(val){
+    const helper = (node)=> {
+      if (node === null) {
+        return false
+      } else if (node.val === val) {
+        return true
+      } else {
+        if(val < node.val) {
+          return helper(node.left)
+        } else {
+          return helper(node.right)
+        }
+      }
+    }
+      return helper(this.root)
+  }
 }
 
-const BST = new BinarySearchTree();
-BST.add(10).add(6).add(12).add(8).add(11)
+module.exports = BinarySearchTree
